@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://scholarly.vernacular.io/ -->
+<html lang="en-GB"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width">
+    <title>Scholarly HTML — Markedly Smart</title>
+    <link rel="stylesheet" href="./Scholarly HTML/scholarly.css">
+    <link rel="stylesheet" href="./Scholarly HTML/prism-coy.css">
+    <script src="./Scholarly HTML/prism.js.download" defer=""></script>
+  </head>
+  <body prefix="schema: http://schema.org/ xsd: http://www.w3.org/2001/XMLSchema# sa: https://ns.science.ai/">
+    <header>
+      <p class="title">Ark (Artwork Provenance)</p>
+      <p class="subtitle">Scolary html</p>
+    </header>
+    <article id="what" typeof="schema:ScholarlyArticle" resource="#">
+      <h1>Ark (Artwork Provenance)</h1>
+      <section>
+        <ol>
+          <li property="schema:author" typeof="sa:ContributorRole">
+            <a property="schema:author" href="https://github.com/Lulubul/Ark-Artwork-Provenance-" typeof="schema:Person">
+              <span property="schema:givenName">Robert</span>
+              <span property="schema:familyName">Unguru</span>
+            </a>
+            <a href="http://scholarly.vernacular.io/#scienceai" property="sa:roleAffiliation" resource="http://science.ai/">a</a>
+            <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+              <a property="schema:email" href="mailto:robert.unguru@gmail.com" title="corresponding author">✉</a>
+            </sup>
+          </li>
+          <li property="schema:author" typeof="sa:ContributorRole">
+            <a property="schema:author" href="https://github.com/Lulubul/Ark-Artwork-Provenance-" typeof="schema:Person">
+              <span property="schema:givenName">Claudiu</span>
+              <span property="schema:familyName">Unguru</span>
+            </a>
+            <a href="http://scholarly.vernacular.io/#scienceai" property="sa:roleAffiliation" resource="http://science.ai/">a</a>
+            <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+              <a property="schema:email" href="mailto:claudiu.unguru@gmail.com" title="corresponding author">✉</a>
+            </sup>
+          </li>
+          <li property="schema:contributor" typeof="sa:ContributorRole">
+            <a property="schema:contributor" href="https://github.com/Lulubul/Ark-Artwork-Provenance-" typeof="schema:Person">
+              <span property="schema:givenName">Cristian</span>
+              <span property="schema:familyName">Merticaru-Rafael</span>
+            </a>
+            <a href="http://scholarly.vernacular.io/#scienceai" property="sa:roleAffiliation" resource="http://science.ai/">a</a>
+          </li>
+        </ol>
+      </section>
+
+      <section typeof="sa:Abstract" id="abstract">
+        <h2>Abstract</h2>
+        <p>
+          Ark is system able to model and manage – including operations like query and visualize – the knowledge about the provenance of each artistic work in conjunction to DBpedia.
+        </p>
+        <p> Keywords: Semantic Web; Provenance; Annotations; RDF; Linked Data; Getty vocabularies. </p>
+      </section>
+      <section typeof="sa:Motivation" id="motivation">
+        <h2>Motivation</h2>
+        <p>
+          Provenance is the history of the ownership and transmission of an object. Provenance is information about entities, activities, and people involved in producing a piece of data or thing, which can be used to form assessments about its quality, reliability or trustworthiness.
+          In the art world, provenance includes the auction houses, dealers, or galleries that have sold an item, the private or institutional collections in which the item has been held, and exhibitions where the item has been displayed. 
+        </p>
+        <p>          
+          There are limitations for clean solutions resulting from the web architecture. The provenance only deals with resources, so it needs a notion of metadata as a resource and also a way of versioning. Metadata is structured data that is used to describe the properties of a resource. The necessary links to other versions can be included with the data. Knowing those limitations, the arhitecture of the web application can be adapted so that the system will work as expected for this particular domain of provenance.
+        </p>
+        <p>
+         In order to have a good overview over the arhitecture of the application we need to take into consideration the following factors:
+        </p>
+        <ul>
+          <li>
+            Versioning and provenance context of resources
+          </li>
+          <li>
+            Options for expressing provenance
+          </li>
+          <li>
+            Using existing generic vocabularies to bind the relationship between resources
+          </li>
+        </ul>
+        <p>
+          In this document it is described a way to structure resources of artwork provenance as linked metadata, using existing generic vocabularies. The problem of metadata provenance is the stable identification of data. The problem gets worse if the data starts to move around, when it is consumed and republished.
+        </p>
+      </section>
+      <section typeof="sa:StructuresAndModels" id="internalData">
+        <h2>Arhitecture of solution</h2>
+        <p>
+          The arhitecture of web application will adopt the semantic web standards that promote common data formats and exchange protocols on the Web, most fundamentally the Resource Description Framework (RDF). RDF offers a way to describe statements: new resource to represent a statement, subject, predicate and object as properties of this resource and
+          additional information using additional properties. The date will have support for linked metadata
+        </p>
+        <ul>
+          <li>
+            Use URIs as names for things.
+          </li>
+          <li>
+            Use HTTP URIs so that people can look up those names.
+          </li>
+          <li>
+            When someone looks up a URI, provide useful information, using the standards (RDF*, SPARQL).
+          </li>
+          <li>
+            Include links to other URIs, so that they can discover more things.
+          </li>
+          <li>
+            Long-term viability as a data format.
+          </li>
+        </ul>
+        <p>
+          In order to develop a domain-independent application, it is necessary to decouple
+          the recommendation engine from the application domains. For this reason, the system is
+          designed as a service provider following the well-known service oriented
+          architecture (SOA) paradigm. Using this decoupled design, each Web-application or domain has to
+          expose a list of items to be used in the personalization process; items has to be
+          semantically annotated using the hierarchically structured concepts of the domain
+          ontology. In order to have concrete terms as predicate the Getty vocabulary is employed as the
+          basis of our ontologically extended artwork. The recursive nature of RDF can be used to describe the vocabularies themselves. There is now a
+          broad range of metadata vocabularies for a detailed description of vocabularies as well as their
+          elements. In a good practice, description of the vocabulary metadata is contained in the RDF as properties of a resource representing the vocabulary. 
+        </p>
+        <p>
+          The Ark web application is composed from four components: the recommandation component which holds the core business rules for recommandantion system,
+          the statistical service, the component that handles the various informations about the provenance of the artwork (e.g. museums and places where the piece of art was stored or exposed, materials of the artwork, artists), the collector service as a layer of abstraction over the communication between the external data and the internal ontology and the last one, the component which facilitates the search of new resources as artists, artworks, places and periods.
+        </p>
+          <figure typeof="sa:Image">
+            <img src="./Scholarly HTML/ArkArhitecture.png">
+            <figcaption>
+              Fig. 1. General arhitecture of application presenting the interaction between components
+            </figcaption>
+          </figure>
+        <p>
+          All data that is published on the Web, according to the Linked Data principles, becomes part of a giant global graph. This logical graph is depicted in the Web of Linked Data Layer in the lower part of Figure 2. Applications that rely on the other patterns, typically implement the modules shown in the Data Access, Integration and Storage Layer. An overview of the tasks handled by these modules is given below:
+        </p>
+        <figure typeof="sa:Image">
+          <img src="./Scholarly HTML/ConsumingarchitectureArk.png">
+          <figcaption>
+            Fig. 2. General arhitecture of Linked Data Applications inspired by <a href="http://linkeddatabook.com/editions/1.0/images/Consumingarchitecture1_small.png"> Evolving the Web into a Global Data </a>
+          </figcaption>
+        </figure>
+        <p>
+          The web application will use the ASP.NET Web API framework to create the REST API, and for the communication between application and SPARQL endpoint will use the Linq-To-RDF(dotNetRDF), library for parsing, managing, querying and writing RDF that work with RDF triple stores such as AllegroGraph, Jena, Stardog and Virtuoso.  
+        </p>
+        <figure typeof="sa:Image">
+          <img src="./Scholarly HTML/linqtordfDiagram.png">
+          <figcaption>
+            Fig. 3. General arhitecture of internal LINQ data handlers inspired by <a href="https://virtuoso.openlinksw.com/whitepapers/rdf%20linked%20data%20dotNET%20LINQ_files/linqtordf2.png"> Virtuoso linq-to-rdf </a>
+          </figcaption>
+        </figure>
+
+        <figure typeof="schema:Table">
+            <table>
+              <caption>
+               Example of requests from web API
+              </caption>
+              <thead>
+                <tr>
+                  <td>Path</td>
+                  <td>Action</td>
+                  <td>Summary</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>/artists</td>
+                  <td>GET</code></td>
+                  <td>List all Artists</code></td>
+                </tr>
+                <tr>
+                  <td>/artists/{artist_id}</td>
+                  <td>GET</td>
+                  <td>Get artist with a specific id</td>
+                </tr>
+                <tr>
+                  <td>/artists/{artist_id}/artworks</td>
+                  <td>GET</td>
+                  <td>Get artworks for a specific artist</td>
+                </tr>
+              </tbody>
+            </table>
+          </figure>
+            </p>
+      </section>
+      <section typeof="sa:Conclusion" id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+          This document has introduced the concept and basic principles of artwork provenance, each resources need to have a version and an metadata attached
+          in order to have a history of actions that changed the state of the resource at a moment in time. Having those aditional information as linked-data, the system can provide a way to visualize and filter the desired information so the user of the web application to understand the true value of an artwork object. 
+        </p>
+      </section>
+      <section typeof="sa:ReferenceList" id="references">
+        <h2>References</h2>
+        <dl>
+          <dt>Springer</dt>
+          <dd typeof="schema:ScholarlyArticle" resource="https://www.dropbox.com/sh/86mql90lk23xpei/aXsDSdKV1W?preview=Eckert-Linked-Data-Provenance-2013.pdf">
+            <cite property="schema:name"><a href="https://www.dropbox.com/sh/86mql90lk23xpei/aXsDSdKV1W?preview=Eckert-Linked-Data-Provenance-2013.pdf">Provenanceand Annotations for Linked Data</a></cite>,
+            by
+            <span property="schema:author" typeof="schema:Person">
+              <span property="schema:name">Kai Eckert</span>
+            </span>;
+            <time property="schema:datePublished" datetime="2013" datatype="xsd:gYear">2013</time>.
+          </dd>
+          <dt>Springer</dt>
+          <dd typeof="schema:ScholarlyArticle">
+            <cite property="schema:name">Semantic Web Services</a></cite>,
+            by
+            <span property="schema:author" typeof="schema:Person">
+              <span property="schema:name">De Dieter Fensel, </span>
+            </span>
+            <span property="schema:author" typeof="schema:Person">
+              <span property="schema:name">Federico Michele Facca, </span>
+            </span>
+            <span property="schema:author" typeof="schema:Person">
+              <span property="schema:name">Elena Simperl, </span>
+            </span>
+            <span property="schema:author" typeof="schema:Person">
+              <span property="schema:name">Ioan Toma</span>
+            </span>;
+            <time property="schema:datePublished" datetime="2011" datatype="xsd:gYear">2011</time>.
+          </dd>
+          <dt>Springer</dt>
+          <dd typeof="schema:ScholarlyArticle">
+            <cite property="schema:name"><a href="https://www.dropbox.com/sh/86mql90lk23xpei/aXsDSdKV1W?preview=Eckert-Linked-Data-Provenance-2013.pdf">Linked Data: Evolving the Web into a Global Data Space</a></cite>,
+            by
+            <span property="schema:author" typeof="schema:Person">
+              <span property="schema:name">Tom Heath , </span>
+            </span>
+            <span property="schema:author" typeof="schema:Person">
+              <span property="schema:name">Christian Bizer </span>
+            </span>;
+            <time property="schema:datePublished" datetime="2011" datatype="xsd:gYear">2011</time>.
+          </dd>
+        </dl>
+      </section>
+    </article>
+</body></html>

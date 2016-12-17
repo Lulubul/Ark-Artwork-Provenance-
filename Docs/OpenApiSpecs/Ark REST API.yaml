@@ -1,0 +1,515 @@
+swagger: "2.0"
+info:
+  title: A RESTful API for Ark
+  description: Move your app forward with the Ark API
+  version: 1.0.0
+host: localhost
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /artists:
+    get:
+      summary: List all Artists
+      operationId: getArtists
+      responses:
+        200:
+          description: An array of Artists
+          schema:
+            $ref: "#/definitions/Artists"
+          examples:
+            application/json: |-
+              {
+                "artists": [
+                  {
+                    "name": "Pablo Picasso",
+                    "links": [
+                      {
+                        "rel": "self",
+                        "allow": [
+                          "GET", "PUT"
+                        ],
+                        "href": "/artists/1234"
+                      }
+                    ]
+                  }
+                ],
+                "links": [
+                  {
+                    "rel": "self",
+                    "allow": [
+                      "GET"
+                    ],
+                    "href": "/artists"
+                  }
+                ]
+              }
+        '404':
+          description: No artist was found
+  /artists/{artist_id}:
+    get:
+      summary: Get a specific Artist
+      operationId: getArtistById
+      tags:
+        - artists/{artist_id}
+      parameters:
+        - name: artist_id
+          in: path
+          required: true
+          type: string
+          description: The id of the Artist to retrieve
+      responses:
+        200:
+          description: An artist
+          schema:
+            $ref: "#/definitions/Person"
+          examples:
+            application/json: |-
+              {
+                "name": "Pablo Picasso",
+                "links": [
+                  {
+                    "rel": "self",
+                    "allow": [
+                      "GET"
+                    ],
+                    "href": "/artists/1234"
+                  }
+                ]
+              }
+        '404':
+          description: No artist with the specified id found
+  /artworks:
+    get:
+      summary: List all Artworks
+      operationId: getArtworks
+      tags:
+        - artworks
+      responses:
+        200:
+          description: An array of Artworks
+          schema:
+            $ref: "#/definitions/Artworks"
+          examples:
+            application/json: |-
+              {
+                "artworks": [
+                  {
+                    "name": "Gioconda",
+                    "artworkType": 
+                      {
+                         typeId: "picture",
+                         description: "Picture artwork type"
+                      }
+                    "links": [
+                      {
+                        "rel": "self",
+                        "allow": [
+                          "GET"
+                        ],
+                        "href": "/artworks/12"
+                      }
+                    ]
+                  }
+                  "links": [
+                  {
+                    "rel": "self",
+                    "allow": [
+                      "GET"
+                    ],
+                    "href": "/artworks"
+                  }
+                ]
+                ]
+                }
+    
+  /artworks/types/{type_id}:
+    get:
+      summary: List all artworks of the specified type
+      operationId: listArtworksByType
+      tags:
+        - artworks/types/{type_id}
+      parameters:
+        - name: type_id
+          in: path
+          required: true
+          description: The id of the Artwork type by which the artworks are retrieved
+          type: string
+      responses:
+        200:
+          description: An array of artworks
+          schema:
+            $ref: "#/definitions/Artworks"
+        '404':
+          description: No artist with the specified id found
+          
+  /artworks/{artwork_id}/activities:
+    get:
+      summary: List all activities for the artwork
+      operationId: listArtworkActivities
+      tags:
+        - artworks/{artwork_id}/activities
+      parameters:
+        - name: artwork_id
+          in: path
+          required: true
+          description: The id of the Artwork type by which the artworks activities are retrieved
+          type: string
+      responses:
+        200:
+          description: An array of activities
+          schema:
+            $ref: "#/definitions/Activity" 
+          examples:
+            application/json: |-
+              {
+                "activities": [
+                  {
+                    "action": "Painting",
+                    "date": 
+                      {
+                         yearFrom: "1549",
+                         yearTo: "1580"
+                      }
+                      "startedBy":
+                       {
+                         "name": "Pablo Picasso",
+                         "links": [
+                          {
+                            "rel": "self".
+                            "allow": [
+                                "GET", "PUT"
+                              ],
+                            "href": "/artists/1234"  
+                          }
+                           
+                          ]
+                       }
+                      "endedBy":
+                       {
+                         "name": "Pablo Picasso",
+                         "links": [
+                          {
+                            "rel": "self".
+                            "allow": [
+                                "GET", "PUT"
+                              ],
+                            "href": "/artists/1234"  
+                          }
+                           
+                          ]
+                       }
+                    
+                  }
+                  "links": [
+                    {
+                    "rel": "self",
+                    "allow": [
+                      "GET", "POST"
+                    ],
+                    "href": "/activities"
+                    }
+                   ]
+                ]		
+              }   
+        '404':
+          description: No artist with the specified id found
+          
+          
+  /artworks/{artwork_id}/assessments/qualities:
+    get:
+      summary: List all qualities for the artwork
+      operationId: getArtworkQualities
+      tags:
+        - artworks/{artwork_id}/assessments/qualities
+      parameters:
+        - name: artwork_id
+          in: path
+          description: An array of qualities
+          required: true
+          type: string
+      responses:
+        200:
+          description: The id of the Artwork type by which the artworks qualities are retrieved
+          schema:
+            $ref: "#/definitions/Qualities"
+        '404':
+            description: No location for the specified id found 
+         
+          
+  /artworks/{artwork_id}/currentLocation:
+    get:
+      summary: Get a specific Artwork's current location
+      operationId: getArtworkLocation
+      tags:
+        - artworks/{artwork_id}/currentLocation
+      parameters:
+        - name: artwork_id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: The current Location for the wrtwork
+          schema:
+            $ref: "#/definitions/Location"
+        '404':
+            description: No location for the specified id found 
+  /artworks/{artwork_id}/locations:
+    get:
+      summary: Get a specific Artwork's locations
+      operationId: getArtworkLocations
+      tags:
+        - artworks/{artwork_id}/locations
+      parameters:
+        - name: artwork_id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: All the locations where the artwork has been
+          schema:
+            $ref: "#/definitions/Locations"
+        '404':
+            description: There are no locations for the specified id found    
+            
+            
+  /artworks/{artwork_id}/creationDate:
+    get:
+      summary: Get a specific Artwork's creation date
+      operationId: getArtworkCreationDate
+      tags:
+        - artworks/{artwork_id}/creationDate
+      parameters:
+        - name: artwork_id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: A creation date
+          schema:
+            $ref: "#/definitions/Date"
+        '404':
+            description: No location for the specified id found 
+  /artists/{artist_id}/artworks:
+    get:
+      summary: List all Artworks for an artist
+      operationId: getArtworksForArtist
+      tags:
+        - artists/{artist_id}/artworks
+      parameters:
+        - name: artist_id
+          in: path
+          required: true
+          type: string
+          description: The id of the Artist to retrieve
+      responses:
+        200:
+          description: An array of Artworks for the specified artist
+          schema:
+            $ref: "#/definitions/Artworks"
+        '404':
+          description: No artist with the specified id found    
+definitions:
+  Person:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        minLength: 1
+        maxLength: 256
+      links:
+        type: array
+        description: A link relation that point to "self" or the "location" of an Artist. Shows the allowed methods on a Artist.
+        items:
+          $ref: "#/definitions/Link"
+  Artists:
+    type: object
+    readOnly: true
+    properties:
+      artists:
+        type: array
+        items:
+          $ref: "#/definitions/Person"
+      links:
+        type: array
+        description: A link relation that point to "self". Shows the allowed methods on Artist.
+        items:
+          $ref: "#/definitions/Link"
+  Artwork:
+    type: object
+    readOnly: true
+    properties:
+      name:
+        type: string
+        minLength: 1
+        maxLength: 256
+      location:
+        type: object
+        $ref: "#/definitions/Location"
+      creationDate:
+        type: object
+        $ref: "#/definitions/Date"
+      links:
+        type: array
+        description: A link relation that point to "self" or the "location" of an Artist. Shows the allowed methods on a Artist.
+        items:
+          $ref: "#/definitions/Link"
+  Artworks:
+    type: object
+    properties:
+      artworks:
+        type: array
+        items:
+          $ref: "#/definitions/Artwork"
+      links:
+        type: array
+        description: A link relation that point to "self". Shows the allowed methods on Artist.
+        items:
+          $ref: "#/definitions/Link"
+  ArtworkType:
+    type: object
+    readOnly: true
+    properties:
+      type_id:
+        type: string
+        description: Unique identifier representing a specific type for a given name of type..
+      description:
+          type: string
+          description: Description of artwork type.
+      display_name:
+        type: string
+        description: Display name of artwork type.
+  Qualities:
+    type: object
+    properties:
+      artworks:
+        type: array
+        items:
+          $ref: "#/definitions/Quality"
+      links:
+        type: array
+        description: A link relation that point to "self". Shows the allowed methods on Quality.
+        items:
+          $ref: "#/definitions/Link" 
+  Quality:
+    type: object
+    readOnly: true
+    properties:
+      name:
+        type: string
+        minLength: 1
+        maxLength: 256
+      comment:
+        type: string
+      range:
+        type: string  
+      links:
+        type: array
+        description: A link relation that point to "self" or the "location" of a Quality. Shows the allowed methods on a Quality.
+        items:
+          $ref: "#/definitions/Link"        
+  Medium:
+    type: object
+    readOnly: true
+    properties:
+      name:
+        type: string
+        minLength: 1
+        maxLength: 256
+      origin:
+        type: object
+        $ref: "#/definitions/Location"
+      mediumType:
+        type: string
+        minLength: 1
+        maxLength: 256
+      color:
+        type: string
+        minLength: 1
+        maxLength: 256
+      date:
+        type: object
+        $ref: "#/definitions/Date"
+  Location:
+    type: object
+    readOnly: true
+    properties:
+      country:
+        type: string 
+      city:
+        type: string
+        
+  Locations:
+    type: object
+    properties:
+      artworks:
+        type: array
+        items:
+          $ref: "#/definitions/Location"
+      links:
+        type: array
+        description: A link relation that point to "self". Shows the allowed methods on Artist.
+        items:
+          $ref: "#/definitions/Link" 
+          
+  Date:
+    type: object
+    properties:
+      yearFrom:
+        type: string
+      yearTo:
+         type: string
+      year:
+        type: string
+      month:
+        type: string
+      day:
+        type: string
+        
+  Activity:
+    type: object
+    properties:
+      action:
+        type: string
+      date: 
+        type : object
+        $ref: "#/definitions/Date"
+      startedBy:
+        type: object
+        $ref: "#/definitions/Person"
+      endedBy:
+        type: object
+        $ref: "#/definitions/Person"
+        
+  Activities:
+    type: object
+    properties:
+      activities:
+        type: array
+        items:
+          $ref: "#/definitions/Activity"
+      links:
+        type: array
+        description: A link relation that point to "self". Shows the allowed methods on Activities.
+        items:
+          $ref: "#/definitions/Link"       
+  Link:
+    type: object
+    readOnly: true
+    properties:
+      rel:
+        type: string
+      allow:
+        type: string
+        description: The HTTP methods allowed on the href.
+      href:
+        type: string
+        format: url                  
