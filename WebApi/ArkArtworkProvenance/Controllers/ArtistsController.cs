@@ -1,24 +1,22 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Web.Http;
-using VDS.RDF.Query;
+using System.Web.Http.Cors;
+using VDS.RDF.Storage;
 
 
 namespace ArkArtworkProvenance.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class ArtistsController : ApiController
     {
         [HttpGet]
-        public SparqlResultSet GetArtists()
+        public string GetArtists()
         {
-            //Define a remote endpoint
-            //Use the DBPedia SPARQL endpoint with the default Graph set to DBPedia
-            SparqlRemoteEndpoint endpoint = new SparqlRemoteEndpoint(new Uri("http://dbpedia.org/sparql"), "http://dbpedia.org");
-
-            //Make a SELECT query against the Endpoint
-            SparqlResultSet results = endpoint.QueryWithResultSet("select distinct ?Concept where {[] a ?Concept} LIMIT 100");
-
-            return results;
-
+            using (StardogConnector dog = new StardogConnector("http://localhost:5820/", "Ark", "admin", "admin"))
+            {
+                var results = dog.Query("select distinct ?subj {?subj skos:prefLabel|skos:altLabel \"female\"@en}");
+                return results.ToString();
+            }
         }
     }
 }
