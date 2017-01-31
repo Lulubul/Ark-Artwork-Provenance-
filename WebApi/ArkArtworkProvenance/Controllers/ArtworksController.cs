@@ -46,20 +46,24 @@ namespace ArkArtworkProvenance.Controllers
             using (StardogConnector dog = new StardogConnector(StarDogUrl, DbName, "admin", "admin"))
             {
                 SparqlResultSet artworkResults = dog.Query(
-                    "SELECT distinct ?abstract ?depiction ?museumlabel ?authorLabel WHERE {" +
+                    "SELECT distinct ?label ?abstract ?depiction ?museumlabel ?authorLabel WHERE {" +
                     "?artwork a dbo:Artwork ." +
-                    "?artwork rdfs:label \"" + title + "\"@en . " +
+                    "?artwork rdfs:label ?label . " +
                     "?artwork dbo:abstract ?abstract ." +
                     "?artwork foaf:depiction ?depiction ." +
                     "?artwork dbo:author ?author ." +
                     "?author foaf:name ?authorLabel ." +
                     "?artwork dbo:museum ?museum ." +
                     "?museum rdfs:label ?museumlabel ." +
-                    "FILTER(lang(?museumlabel) = \"en\")" +
+                    "FILTER regex(str(?label), \"" + title + "\")" +
+                    "FILTER(lang(?museumlabel) = \"en\") ." +
                     "FILTER(lang(?abstract) = \"en\")}") as SparqlResultSet;
 
+                if (!artworkResults.Any()) { return null; }
+
                 var result = artworkResults[0];
-                return new Artwork(title,
+                return new Artwork(
+                    result.Value("label").ToString(),
                     result.Value("museumlabel").ToString(),
                     result.Value("abstract").ToString(),
                     result.Value("depiction").ToString());

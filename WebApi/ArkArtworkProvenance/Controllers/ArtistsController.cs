@@ -24,8 +24,8 @@ namespace ArkArtworkProvenance.Controllers
                     "SELECT distinct ?label ?abstract WHERE {" +
                     "?person rdf:type dbo:Artist ." +
                     "?person rdfs:label ?label . " +
-                     "?person dbo:abstract ?abstract ." +
-                     "FILTER(lang(?abstract) = 'en') ." +
+                    "?person dbo:abstract ?abstract ." +
+                    "FILTER(lang(?abstract) = 'en') ." +
                     "FILTER(lang(?label) = \"en\") }") as SparqlResultSet;
 
                 var artists = artistsResults?.Select(x => new Artist(x));
