@@ -1,5 +1,6 @@
-import { Revision } from './revision';
 
+
+import { Revision } from '../revision/revision';
 export interface Artwork{
     id: number;
     title: string;
@@ -9,8 +10,8 @@ export interface Artwork{
    	artist: string;
    	year: string;
     museum: string;
-    country: string;
-    city: string;
-    medium: string;
-    period: string;
+    country: String;
+    city: String;
+    medium: String;
+    period: String;
 }

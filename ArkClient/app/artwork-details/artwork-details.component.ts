@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Artwork } from './artwork';
-import { ArtworkService } from './artwork.service';
+import { Artwork } from '../artwork/artwork';
+import { ArtworkService } from '../artwork/artwork.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'artwork-provenance',
-  templateUrl: './artwork-provenance.component.html'
+  selector: 'artwork-details',
+  templateUrl: './artwork-details.component.html'
 })
-export class ArtworkProvenanceComponent implements OnInit, OnDestroy {
+export class ArtworkDetailsComponent implements OnInit, OnDestroy {
     artwork: Artwork;
     sub: any;
 
@@ -21,10 +21,11 @@ export class ArtworkProvenanceComponent implements OnInit, OnDestroy {
     ngOnInit(){
         this.sub = this.route.params.subscribe(params => {
           let id = Number.parseInt(params['id']);
-          this.artwork = this.artworkService.get(1);
+          this.artworkService
+            .getByTitle("Transfiguration (Raphael)")
+            .subscribe(data => { this.artwork = data as Artwork; });
         });
     }
-
     ngOnDestroy(){
         this.sub.unsubscribe();
     }

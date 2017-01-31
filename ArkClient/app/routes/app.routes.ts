@@ -1,9 +1,9 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { ArtworkDetailsComponent } from './artwork-details.component';
-import { ArtworkProvenanceComponent } from './artwork-provenance.component';
-import { ArkComponent } from './ark-index.component';
-import { ArtworkListComponent } from './artwork-list.component';
+import { ArtworkDetailsComponent } from '../artwork-details/artwork-details.component';
+import { ArtworkProvenanceComponent } from '../artwork-provenance/artwork-provenance.component';
+import { ArkComponent } from '../ark-index/ark-index.component';
+import { ArtworkListComponent } from '../artwork-list/artwork-list.component';
 
 // Route config let's you map routes to components
 const routes: Routes = [
@@ -22,7 +22,7 @@ const routes: Routes = [
   {
     path: 'provenance/:id',
     component: ArtworkProvenanceComponent
-  }
+  },
   // map '/' to '/persons' as our default route
   {
     path: '',

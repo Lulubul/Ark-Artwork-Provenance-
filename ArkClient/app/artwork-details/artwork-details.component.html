@@ -1,6 +1,6 @@
 <div id="sidebar_container">
-        <div class="imageImportant" *ngIf="artwork">
-            <img src="{{artwork.ImageUrl}}" height="300" width="400" />
+        <div class="imageImportant">
+            <img src="images/El_Greco_13.jpg" height="300" width="400"/>
         </div>
         <div class="sidebar">
          <div class="form-style-2">
@@ -75,8 +75,9 @@
       </a>
     <div class="content">
         <div *ngIf="artwork">
-        <h1 id="title">{{artwork.Title}}</h1>
-        <p>{{artwork.Abstract}}</p>
+        <h1 id="title">{{artwork.title}}</h1>
+        <p>{{artwork.abstract}}</p>
+      
     </div>
        </div>
        <div class="images">
