@@ -32,8 +32,6 @@ namespace ArkArtworkProvenance.Controllers
                     "FILTER(lang(?label) = 'en') ." +
                     "FILTER regex(str(?labelArtwork),   \"" + artistName + "\")" +
                     "FILTER(lang(?labelArtwork) = 'en') }") 
-
-                    
                   as SparqlResultSet;
 
                 var artworks = artworksResults?.Select(x => new Artwork(x));
