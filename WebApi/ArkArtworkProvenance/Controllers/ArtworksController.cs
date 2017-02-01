@@ -13,7 +13,7 @@ namespace ArkArtworkProvenance.Controllers
     public class ArtworksController : ApiController
     {
         private const string StarDogUrl = "http://localhost:5820/";
-        private const string DbName = "myDb";
+        private const string DbName = "ArkDB";  
 
         // GET api/<controller>
         public IEnumerable<Artwork> Get()

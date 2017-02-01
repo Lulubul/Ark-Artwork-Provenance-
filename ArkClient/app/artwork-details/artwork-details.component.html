@@ -1,0 +1,95 @@
+<div id="sidebar_container">
+    <div class="imageImportant">
+        <img src="{{artwork.imageUrl}}" height="300" width="400" />
+    </div>
+    <div class="sidebar">
+        <div class="form-style-2">
+            <form action="" method="post">
+                <ul id="myForm">
+                    <li><label for="field4"><span>author</span>
+                                <select name="field4" class="select-field">
+                                    <option value="General Question">El Greco</option>  
+                                </select>
+                            </label>
+                    </li><br/><br />
+                    <li><label for="field4"><span>museum</span>
+                                <select name="field4" class="select-field">
+                                    <option value="General Question">Minneapolis Institute of Art</option>  
+                                </select>
+                            </label>
+                    </li><br /><br />
+                    <li><label for="field4"><span>location</span>
+                                <select name="field4" class="select-field">
+                                    <option value="General Question">Minneapolis</option>   
+                                </select>
+                            </label>
+                    </li><br /><br />
+                    <li><label for="field4"><span>country</span>
+                                <select name="field4" class="select-field">
+                                    <option value="General Question">Spain</option> 
+                                </select>
+                            </label>
+                    </li><br /><br />
+                    <li><label for="field4"><span>medium</span>
+                                <select name="field4" class="select-field">
+                                    <option value="General Question">Oil in canvas</option> 
+                                </select>
+                            </label>
+                    </li><br /><br />
+                    <li><label for="field4"><span>style/period/culture</span>
+                                <select name="field4" class="select-field">
+                                    <option value="General Question">Christian art</option> 
+                                </select>
+                            </label>
+                    </li><br />
+                </ul>
+
+                <label><span>&nbsp;</span><input type="submit" id="submitBtn" value="Filter" /></label>
+            </form>
+        </div>
+    </div>
+</div>
+<a href="#" [routerLink]="['/provenance', artwork.id]">
+    <div class="provenance">
+        <div class="revisions">
+            <div id="wrap">
+                <div class="line" id="line1"></div>
+                <div class="text">700128359</div>
+            </div>
+            <div id="wrap">
+                <div class="line" id="line2"></div>
+                <div class="text">700128358</div>
+            </div>
+            <div id="wrap">
+                <div class="line" id="line3"></div>
+                <div class="text">700128357</div>
+            </div>
+            <div id="wrap">
+                <div class="line" id="line4"></div>
+                <div class="text">700128356</div>
+            </div>
+
+        </div>
+        <div class="prov">
+            <p> Provenance</p>
+        </div>
+    </div>
+</a>
+<div class="content">
+    <div *ngIf="artwork">
+        <h1 id="title">{{artwork.title}}</h1>
+        <p>{{artwork.abstract}}</p>
+
+    </div>
+</div>
+<div class="images">
+    <h2>Similar artwors</h2>
+    <ul id="images">
+        <li><img src="images/El_Greco_13.jpg" width="600" height="300" alt="gallery_buildings_one" /></li>
+        <li><img src="images/image2.jpg" width="600" height="300" alt="gallery_buildings_two" /></li>
+        <li><img src="images/image3.jpg" width="600" height="300" alt="gallery_buildings_three" /></li>
+        <li><img src="images/image4.jpg" width="600" height="300" alt="gallery_buildings_four" /></li>
+        <li><img src="images/image5.jpg" width="600" height="300" alt="gallery_buildings_five" /></li>
+        <li><img src="images/image6.jpg" width="600" height="300" alt="gallery_buildings_six" /></li>
+    </ul>
+</div>

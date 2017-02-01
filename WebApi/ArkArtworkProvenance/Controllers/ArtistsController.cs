@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using ArkArtworkProvenance.Models;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using VDS.RDF.Storage;
 using VDS.RDF.Query;
-using ArkArtworkProvenance.Models;
-using System.Linq;
+using VDS.RDF.Storage;
+
 
 namespace ArkArtworkProvenance.Controllers
 {
@@ -12,7 +13,7 @@ namespace ArkArtworkProvenance.Controllers
     public class ArtistsController : ApiController
     {
         private const string StarDogUrl = "http://localhost:5820/";
-        private const string DbName = "myDb";
+        private const string DbName = "ArkDB";
 
         // GET api/<controller>
         public IEnumerable<Artist> Get()
