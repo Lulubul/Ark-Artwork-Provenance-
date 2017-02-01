@@ -23,16 +23,6 @@ const ARTWORKS : Artwork[] = [
         medium: '',
         period: '' }
     ];
-   
-
-  export class ArtistClass {
-  
-    id: number;
-    name: string;
-    abstract: string;
-    imageUrl: string;
-
-} 
 
 @Injectable()
 export class ArtworkService{
@@ -40,38 +30,28 @@ export class ArtworkService{
   constructor(private http: Http) { }
 
   private baseUrl: string = 'localhost:2994/api';
-
   private artworkAPI = 'http://localhost:2994/api/artworks';
-  private artistsAPI = 'http://localhost:2994/api/artists';
 
-  getAll() : Artwork[] {
-    return ARTWORKS.map(p => this.clone(p));
+  getAll() : Observable<Artwork[]> {
+      return this.http.get(this.artworkAPI)
+            .map(response => response.json() as Artwork[])
+            .catch((error: any) => {return Observable.throw(error.message);});
   }
 
   get(id: number) : Artwork {
     return this.clone(ARTWORKS.find(p => p.id === id));
   }
 
-  getByTitle(title: string): Observable<any> {
+  getByTitle(title: string) : Observable<any> {
       const url = `${this.artworkAPI}?title=${title}`;
       return this.http.get(url)
             .map(this.extractData)
             .catch((error: any) => {return Observable.throw(error.message);});
   }
 
-
   save(artwork: Artwork){
     let originalArtwork = ARTWORKS.find(p => p.id === artwork.id);
     if (originalArtwork) Object.assign(originalArtwork, artwork);
-  }
-
-
-  getAllArtists(): Observable<ArtistClass[]> {
-    const url = `${this.artistsAPI}`;
-    return this.http
-               .get(url)
-               .map(response => response.json() as ArtistClass[]);
-
   }
 
   private extractData(res: Response) {

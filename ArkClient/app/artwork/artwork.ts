@@ -1,5 +1,4 @@
 
-
 import { Revision } from '../revision/revision';
 export interface Artwork{
     id: number;

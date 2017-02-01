@@ -20,9 +20,9 @@ export class ArtworkDetailsComponent implements OnInit, OnDestroy {
 
     ngOnInit(){
         this.sub = this.route.params.subscribe(params => {
-          let id = Number.parseInt(params['id']);
+          let title = params['id'];
           this.artworkService
-            .getByTitle("Transfiguration (Raphael)")
+            .getByTitle(title)
             .subscribe(data => { this.artwork = data as Artwork; });
         });
     }

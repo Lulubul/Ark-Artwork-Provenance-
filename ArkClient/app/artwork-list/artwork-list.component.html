@@ -1,47 +1,52 @@
 <div id="sidebar_container">
 
-    <div>
-    <div *ngFor="let artist of artistsComboValues">
-      {{artist.name}}
-    </div>
-  </div>
-        
-        <div class="sidebar">
-         <div class="form-style-2">
-                <form (ngSubmit)="processForm()"  #form="ngForm">
-                    <ul id="myForm" >
-                        <li><label for="field4"><span>author</span>
+    <div class="sidebar">
+        <div class="form-style-2">
+            <p> Filter artwork by </p>
+            <form (ngSubmit)="processForm()" #form="ngForm">
+                <ul id="myForm">
+                    <li><label for="field4"><span>author</span>
                                 <select name="artist"  class="select-field">
-                                    <option *ngFor="let artist of artistsComboValues" [value]="artist.name">  
+                                    <option *ngFor="let artist of artistsComboValues"  [value]="artist.name">  
                                         {{artist.name}}
                                     </option> 
                                 </select>
                             </label>
-                        </li><br/><br />
-                    </ul>
-                    <label><span>&nbsp;</span><button type="submit" id="submitBtn">Filter</button></label>
-                </form> 
+                    </li><br/><br />
+                    <li><label for="field4"><span>name</span>
+                                <select name="artist"  class="select-field">
+                                    <option *ngFor="let artist of artistsComboValues"  [value]="artist.name">  
+                                        {{artist.name}}
+                                    </option> 
+                                </select>
+                            </label>
+                    </li><br/><br />
+                    <li><label for="field4"><span>year</span>
+                                <select name="artist"  class="select-field">
+                                    <option *ngFor="let artist of artistsComboValues"  [value]="artist.name">  
+                                        {{artist.name}}
+                                    </option> 
+                                </select>
+                            </label>
+                    </li><br/><br />
+                </ul>
+                <label><span>&nbsp;</span><button type="submit" id="submitBtn">Filter</button></label>
+            </form>
         </div>
-        </div>
-      </div>
-      <div class="content">
-        <ul>
-            <li *ngFor="let artwork of artworks">
-                <a href="#" [routerLink]="['/artworks', artwork.id]">
-                    
-                 <div class="img">
-                <a target="_blank" href="fjords.jpg">
-                    <img src="{{artwork.imageUrl}}" width="300" height="200">
-                </a>
-                <div class="desc">{{artwork.title}}</div>
-                </div>
-                </a>
-
-            </li>
-    </ul>
-       
-
-
-      
     </div>
-       
+</div>
+<div class="content">
+    <ul>
+        <li *ngFor="let artwork of artworks">
+            <a href="#" [routerLink]="['/artworks', artwork.id]">
+                <div class="img">
+                    <a target="_blank" href="fjords.jpg">
+                        <img src="{{artwork.imageUrl}}" width="300" height="200">
+                    </a>
+                    <div class="desc">{{artwork.title}}</div>
+                </div>
+            </a>
+
+        </li>
+    </ul>
+</div>
