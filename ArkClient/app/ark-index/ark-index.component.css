@@ -570,6 +570,7 @@ ul#nav ul li a:hover {
   margin: 0 15px 10px 0;
   padding: 0;
   position: relative;
+  clear: both;
 }
 
 /* Image Transitions */
@@ -595,11 +596,11 @@ ul#myForm span{
 	background:black;
 	color:white;
 	float: right;
-	max-width:100px;
 	border-color:red;
 }
 
-ul#myForm li {
+.contentProv {
+  clear: left;
 }
 
 ul#images li {

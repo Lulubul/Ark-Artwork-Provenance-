@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { Artwork } from '../artwork/artwork';
+import { Artwork, Provenance} from '../artwork/artwork';
 import { ArtworkService } from '../artwork/artwork.service';
 
 @Component({
@@ -12,6 +11,8 @@ import { ArtworkService } from '../artwork/artwork.service';
 export class ArtworkDetailsComponent implements OnInit, OnDestroy {
     artwork: Artwork;
     sub: any;
+    provenances: Provenance[] = [];
+    relatedArtworks: Artwork[];
 
     constructor(private artworkService: ArtworkService,
                 private route: ActivatedRoute,
@@ -20,11 +21,19 @@ export class ArtworkDetailsComponent implements OnInit, OnDestroy {
 
     ngOnInit(){
         this.sub = this.route.params.subscribe(params => {
-          let title = params['id'];
           this.artworkService
-            .getByTitle(title)
+            .getByTitle("Iris")
             .subscribe(data => { this.artwork = data as Artwork; });
+
+          this.artworkService
+            .getProvenanceByTitle("Iris")
+            .subscribe(data => { this.provenances = data as Provenance[]; });
+
+          this.artworkService
+            .getRelatedArworks("Gogh")
+            .subscribe(data => { this.relatedArtworks = data as Artwork[]; });
         });
+        
     }
     ngOnDestroy(){
         this.sub.unsubscribe();

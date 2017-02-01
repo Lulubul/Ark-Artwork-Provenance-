@@ -9,6 +9,7 @@ import { ArtworkService } from '../artwork/artwork.service';
   selector: 'artwork-provenance',
   templateUrl: './artwork-provenance.component.html'
 })
+
 export class ArtworkProvenanceComponent implements OnInit, OnDestroy {
     artwork: Artwork;
     sub: any;

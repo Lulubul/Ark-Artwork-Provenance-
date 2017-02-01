@@ -6,23 +6,7 @@
             <form (ngSubmit)="processForm()" #form="ngForm">
                 <ul id="myForm">
                     <li><label for="field4"><span>author</span>
-                                <select name="artist"  class="select-field">
-                                    <option *ngFor="let artist of artistsComboValues"  [value]="artist.name">  
-                                        {{artist.name}}
-                                    </option> 
-                                </select>
-                            </label>
-                    </li><br/><br />
-                    <li><label for="field4"><span>name</span>
-                                <select name="artist"  class="select-field">
-                                    <option *ngFor="let artist of artistsComboValues"  [value]="artist.name">  
-                                        {{artist.name}}
-                                    </option> 
-                                </select>
-                            </label>
-                    </li><br/><br />
-                    <li><label for="field4"><span>year</span>
-                                <select name="artist"  class="select-field">
+                                <select name="artist" class="select-field">
                                     <option *ngFor="let artist of artistsComboValues"  [value]="artist.name">  
                                         {{artist.name}}
                                     </option> 
@@ -38,7 +22,7 @@
 <div class="content">
     <ul>
         <li *ngFor="let artwork of artworks">
-            <a href="#" [routerLink]="['/artworks', artwork.id]">
+            <a href="#" [routerLink]="['/artworks', artwork.title]">
                 <div class="img">
                     <a target="_blank" href="fjords.jpg">
                         <img src="{{artwork.imageUrl}}" width="300" height="200">

@@ -1,55 +1,25 @@
 <div id="sidebar_container">
-    <div class="imageImportant">
+    <div class="imageImportant" *ngIf="artwork">
         <img src="{{artwork.imageUrl}}" height="300" width="400" />
     </div>
-    <div class="sidebar">
+    <div class="sidebar" *ngIf="artwork">
         <div class="form-style-2">
             <form action="" method="post">
                 <ul id="myForm">
                     <li><label for="field4"><span>author</span>
-                                <select name="field4" class="select-field">
-                                    <option value="General Question">El Greco</option>  
-                                </select>
+                                <span name="field4"> {{artwork.author}} </span>
                             </label>
                     </li><br/><br />
                     <li><label for="field4"><span>museum</span>
-                                <select name="field4" class="select-field">
-                                    <option value="General Question">Minneapolis Institute of Art</option>  
-                                </select>
+                                <span name="field4"> {{artwork.museum}} </span>
                             </label>
                     </li><br /><br />
-                    <li><label for="field4"><span>location</span>
-                                <select name="field4" class="select-field">
-                                    <option value="General Question">Minneapolis</option>   
-                                </select>
-                            </label>
-                    </li><br /><br />
-                    <li><label for="field4"><span>country</span>
-                                <select name="field4" class="select-field">
-                                    <option value="General Question">Spain</option> 
-                                </select>
-                            </label>
-                    </li><br /><br />
-                    <li><label for="field4"><span>medium</span>
-                                <select name="field4" class="select-field">
-                                    <option value="General Question">Oil in canvas</option> 
-                                </select>
-                            </label>
-                    </li><br /><br />
-                    <li><label for="field4"><span>style/period/culture</span>
-                                <select name="field4" class="select-field">
-                                    <option value="General Question">Christian art</option> 
-                                </select>
-                            </label>
-                    </li><br />
                 </ul>
-
-                <label><span>&nbsp;</span><input type="submit" id="submitBtn" value="Filter" /></label>
             </form>
         </div>
     </div>
 </div>
-<a href="#" [routerLink]="['/provenance', artwork.id]">
+<a *ngIf="artwork" href="#" [routerLink]="['/provenance', artwork.id]">
     <div class="provenance">
         <div class="revisions">
             <div id="wrap">
@@ -68,10 +38,6 @@
                 <div class="line" id="line4"></div>
                 <div class="text">700128356</div>
             </div>
-
-        </div>
-        <div class="prov">
-            <p> Provenance</p>
         </div>
     </div>
 </a>
@@ -79,17 +45,26 @@
     <div *ngIf="artwork">
         <h1 id="title">{{artwork.title}}</h1>
         <p>{{artwork.abstract}}</p>
-
     </div>
 </div>
-<div class="images">
-    <h2>Similar artwors</h2>
-    <ul id="images">
-        <li><img src="images/El_Greco_13.jpg" width="600" height="300" alt="gallery_buildings_one" /></li>
-        <li><img src="images/image2.jpg" width="600" height="300" alt="gallery_buildings_two" /></li>
-        <li><img src="images/image3.jpg" width="600" height="300" alt="gallery_buildings_three" /></li>
-        <li><img src="images/image4.jpg" width="600" height="300" alt="gallery_buildings_four" /></li>
-        <li><img src="images/image5.jpg" width="600" height="300" alt="gallery_buildings_five" /></li>
-        <li><img src="images/image6.jpg" width="600" height="300" alt="gallery_buildings_six" /></li>
-    </ul>
+
+<div class="contentProv" *ngIf="provenances" style="clear: left">
+    <h2>Provenance</h2>
+     <ul class="provenances">
+         <li class="provenanceDetails" *ngFor="let provenance of provenances">
+             <span class="dateAcquired" style="border: 1px solid #DC143C; padding: 5px; margin-right: 5px">{{provenance.dateAcquired}}</span>
+             <span class="ownedBy" style="border: 1px solid #DC143C; padding: 5px; margin-right: 5px">{{provenance.ownedBy}}</span>
+             <span class="location" style="border: 1px solid #DC143C; padding: 5px; margin-right: 5px">{{provenance.location}}</span>
+         </li>
+    </ul>  
 </div>
+
+<h2>Similar artworks</h2>
+<div class="similarArtworks" style="display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;">
+    <div *ngFor="let relatedArtwork of relatedArtworks" style="margin-right: 10px;">
+        <img src="{{relatedArtwork.imageUrl}}" alt="" style="max-height: 300px; max-width: 200px;" />
+    </div>
+</div>  

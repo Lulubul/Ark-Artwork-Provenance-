@@ -31,6 +31,8 @@ export class ArtworkService{
 
   private baseUrl: string = 'localhost:2994/api';
   private artworkAPI = 'http://localhost:2994/api/artworks';
+  private provenanceAPI = 'http://localhost:2994/api/provenance';
+  private relatedArtworkAPI = 'http://localhost:2994/api/relatedArtworks';
 
   getAll() : Observable<Artwork[]> {
       return this.http.get(this.artworkAPI)
@@ -44,6 +46,20 @@ export class ArtworkService{
 
   getByTitle(title: string) : Observable<any> {
       const url = `${this.artworkAPI}?title=${title}`;
+      return this.http.get(url)
+            .map(this.extractData)
+            .catch((error: any) => {return Observable.throw(error.message);});
+  }
+
+  getProvenanceByTitle(title: string) : Observable<any> {
+      const url = `${this.provenanceAPI}?title=${title}`;
+      return this.http.get(url)
+            .map(this.extractData)
+            .catch((error: any) => {return Observable.throw(error.message);});
+  }
+
+  getRelatedArworks(artist: string) : Observable<any> {
+      const url = `${this.relatedArtworkAPI}?artist=${artist}`;
       return this.http.get(url)
             .map(this.extractData)
             .catch((error: any) => {return Observable.throw(error.message);});

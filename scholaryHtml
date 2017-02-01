@@ -1,0 +1,43 @@
+Motivation
+
+Provenance is the history of the ownership and transmission of an object. In the art world, provenance includes the auction houses, dealers, or galleries that have sold an item, the private or institutional collections in which the item has been held, and exhibitions where the item has been displayed. Provenance is information about entities, activities, and people involved in producing a piece of data or thing, which can be used to form assessments about its quality, reliability or trustworthiness.
+
+In this article it is described a way to structure resources of artwork provenance as linked metadata, using existing generic vocabularies. The problem of metadata provenance is the stable identification of data. The problem gets worse if the data starts to move around, when it is consumed and republished.
+
+There are limitations for clean solutions resulting from the web architecture. The provenance only deals with resources, so it needs a notion of metadata as a resource and also a way of versioning. Metadata is structured data that is used to describe the properties of a resource. The necessary links to other versions can be included with the data. Knowing those limitations, the arhitecture of the web application can be adapted so that the system will work as expected for this particular domain of provenance.
+
+Technical solution
+
+The arhitecture of web application will adopt the semantic web standards promote common data formats and exchange protocols on the Web, most fundamentally the Resource Description Framework (RDF). RDF offers a way to describe statements: new resource to represent a statement, subject, predicate and object as properties of this resource and
+additional information using additional properties. The date will have support for linked metadata
+1) Use URIs as names for things.
+2) Use HTTP URIs so that people can look up those names.
+3) When someone looks up a URI, provide useful information,
+using the standards (RDF*, SPARQL).
+4) Include links to other URIs, so that they can discover more
+things. 
+
+In order to develop a domain-independent application, it is necessary to decouple
+the recommendation engine from the application domains. For this reason, the system is
+designed as a service provider following the well-known service oriented
+architecture (SOA) paradigm. Using this decoupled design, each Web-application or domain has to
+expose a list of items to be used in the personalization process; items has to be
+semantically annotated using the hierarchically structured concepts of the domain
+ontology. In order to facilitate the reuse of resources and to have concrete terms as predicate we employ the Getty vocabulary as the
+basis of our ontologically extended artwork. The recursive nature of RDF can be used to describe the vocabularies themselves. There is now a
+broad range of metadata vocabularies for a detailed description of vocabularies as well as their
+elements. In a good practice, description of the vocabulary metadata is contained in the RDF as properties of a resource representing the vocabulary. 
+
+The Ark web application is composed from four components: the recommandation component which holds the core business rules for recommandantion system,
+the statistical service, the component that handles the various informations about the provenance of the artwork (e.g. museums and places where the piece of art was stored or exposed, materials of the artwork, artists), the collector service as a layer of abstraction over the communication between the external data and the internal ontology and the last one, the component which facilitates the search of new resources as artists, artworks, places and periods.
+
+The Getty vocabularies can be used in three ways: at the data entry stage, by catalogers or indexers who are describing works of art, architecture, material culture, archival materials, visual surrogates, or bibliographic materials; as knowledge bases, providing information for researchers; and as search assistants to enhance end-user access to online resources.
+
+
+
+
+Bibliography
+
+Semantic Web Services, Springer 2011
+De Dieter Fensel,Federico Michele Facca,Elena Simperl,Ioan Toma
+Provenance and Annotation of Data and Processes, 2010 Springer Deborah McGuinness, James R. Michaelis, Luc Moreau 

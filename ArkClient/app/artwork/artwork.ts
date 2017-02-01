@@ -14,3 +14,10 @@ export interface Artwork{
     medium: String;
     period: String;
 }
+
+
+export interface Provenance {
+    dateAcquired: number;
+    ownedBy: string;
+    location: string;
+}

@@ -8,7 +8,6 @@ using VDS.RDF.Storage;
 
 namespace ArkArtworkProvenance.Controllers
 {
-
     [EnableCors("*", "*", "*")]
     public class ArtworksController : ApiController
     {
@@ -66,9 +65,9 @@ namespace ArkArtworkProvenance.Controllers
                     result.Value("label").ToString(),
                     result.Value("museumlabel").ToString(),
                     result.Value("abstract").ToString(),
-                    result.Value("depiction").ToString());
+                    result.Value("depiction").ToString(),
+                    result.Value("authorLabel").ToString());
             }
         }
-
     }
 }
