@@ -124,6 +124,7 @@
     <Compile Include="Controllers\RelatedArtworksController.cs" />
     <Compile Include="Controllers\ArtworksController.cs" />
     <Compile Include="Controllers\ProvenanceController.cs" />
+    <Compile Include="Controllers\ArtworsReadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
